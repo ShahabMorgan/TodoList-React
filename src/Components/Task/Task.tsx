@@ -1,10 +1,4 @@
-import React, {
-  forwardRef,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import {TodoListApp} from "../Main/Main";
 import Button from "../Buttons/Buttons";
 
@@ -67,7 +61,6 @@ export default function TaskList() {
             onClick={() => {
               newValue.current = {
                 id: v?.id,
-                title: v?.title,
               };
               setTextValue(v?.title);
               setEdite(true);
