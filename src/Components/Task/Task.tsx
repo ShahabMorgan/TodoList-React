@@ -31,9 +31,23 @@ export default function TaskList() {
     tasks.length < 1 && fetchData();
   }, []);
 
+  const editeTask = () => {
+    const updatedTasks = tasks.map((v: any) => {
+      const value = newValue.current;
+      if (v.id === value?.id) {
+        v.title = newText;
+      }
+      return v;
+    });
+    setTask([...updatedTasks]);
+    localStorage.setItem("tasks", JSON.stringify([...updatedTasks]));
+    setEdite(false);
+  };
+  
   const handleInput = (e: any) => {
     setTextValue(e.target?.value);
   };
+  
   const setActive = (elment: any) => {
     elment.currentTarget.classList.toggle("bg-input");
   };
@@ -95,19 +109,7 @@ export default function TaskList() {
           <div className="flex gap-5">
             <Button
               action={() => {
-                const updatedTasks = tasks.map((v: any) => {
-                  const value = newValue.current;
-                  if (v.id === value?.id) {
-                    v.title = newText;
-                  }
-                  return v;
-                });
-                setTask([...updatedTasks]);
-                localStorage.setItem(
-                  "tasks",
-                  JSON.stringify([...updatedTasks])
-                );
-                setEdite(false);
+                editeTask();
               }}
             >
               Submit
