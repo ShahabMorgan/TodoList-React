@@ -6,7 +6,6 @@ import TaskList from "../Task/Task";
 
 export const TodoListApp = createContext();
 
-type TaskList = Object[];
 interface Task {
   descrption: String;
   date: any;
@@ -15,7 +14,7 @@ interface Task {
 
 export default function Main() {
   const [modal, setModal] = useState(false);
-  const [tasks, setTask] = useState(
+  const [tasks, setTask] = useState<Task>(
     JSON.parse(localStorage.getItem("tasks")) || []
   );
   const openModal = () => {

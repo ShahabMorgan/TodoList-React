@@ -9,10 +9,11 @@
   font-style: normal;
 }
 
-*:focus{
+*:focus {
   outline: none;
 }
 :root {
+  overflow: none;
   --input-color: #6c63ff;
   --button: #6c63ff;
   font-family: "Kanit", sans-serif;

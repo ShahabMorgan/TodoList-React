@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {TodoListApp} from "../Main/Main";
 import Button from "../Buttons/Buttons";
 
@@ -8,12 +8,15 @@ interface Task {
   title: String;
   userId: Number;
 }
+interface EditedTask {
+  id: Number | React.Key;
+  title: String;
+}
 
 export default function TaskList() {
   const {tasks, setTask}: any = useContext(TodoListApp);
   const [edite, setEdite] = useState(false);
-  const [newText, setTextValue] = useState("");
-  const newValue = useRef();
+  const [editedTask, setEditedTask] = useState<EditedTask>();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -33,9 +36,9 @@ export default function TaskList() {
 
   const editeTask = () => {
     const updatedTasks = tasks.map((v: any) => {
-      const value = newValue.current;
-      if (v.id === value?.id) {
-        v.title = newText;
+      console.log(editedTask?.id);
+      if (v.id === editedTask?.id) {
+        v.title = editedTask?.title;
       }
       return v;
     });
@@ -43,13 +46,16 @@ export default function TaskList() {
     localStorage.setItem("tasks", JSON.stringify([...updatedTasks]));
     setEdite(false);
   };
-  
+
   const handleInput = (e: any) => {
-    setTextValue(e.target?.value);
+    setEditedTask({
+      title: e.target?.value,
+      id: editedTask?.id,
+    });
   };
-  
+
   const setActive = (elment: any) => {
-    elment.currentTarget.classList.toggle("bg-input");
+    // elment.currentTarget.classList.toggle("bg-input");
   };
 
   const deleteTask = (elment: any) => {
@@ -62,7 +68,7 @@ export default function TaskList() {
     <div className="w-full">
       <div className="flex w-full gap-5" key={v.id}>
         <div
-          className="self-center h-3 p-3 border cursor-pointer text-input border-input rounded-checkBox hover:text-input"
+          className={`self-center h-3 p-3 border cursor-pointer text-input border-input rounded-checkBox  hover:text-input`}
           onClick={(elment) => {
             setActive(elment);
           }}
@@ -73,10 +79,10 @@ export default function TaskList() {
           <div
             className="cursor-pointer hover:text-input"
             onClick={() => {
-              newValue.current = {
-                id: v?.id,
-              };
-              setTextValue(v?.title);
+              // newValue.current = {
+              //   id: v?.id,
+              // };
+              setEditedTask({title: v?.title, id: v?.id});
               setEdite(true);
             }}
           >
@@ -101,7 +107,7 @@ export default function TaskList() {
         <div className="fixed inset-0 flex flex-col items-center justify-center gap-5 bg-modal">
           <textarea
             className="border outlqine-none h-52 w-96 placeholder-input text-input p-input border-input rounded-input "
-            value={newText}
+            value={editedTask?.title}
             onChange={(e) => {
               handleInput(e);
             }}
