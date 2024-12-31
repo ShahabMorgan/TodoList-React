@@ -55,7 +55,7 @@ export default function TaskList() {
   };
 
   const setActive = (elment: any) => {
-    // elment.currentTarget.classList.toggle("bg-input");
+    elment.currentTarget.classList.toggle("bg-input");
   };
 
   const deleteTask = (elment: any) => {
@@ -68,8 +68,10 @@ export default function TaskList() {
     <div className="w-full">
       <div className="flex w-full gap-5" key={v.id}>
         <div
-          className={`self-center h-3 p-3 border cursor-pointer text-input border-input rounded-checkBox  hover:text-input`}
+          className="self-center h-3 p-3 border cursor-pointer text-input border-input rounded-checkBox hover:text-input"
           onClick={(elment) => {
+            setActive(elment);
+            console.log("check");
             setActive(elment);
           }}
         ></div>
@@ -78,10 +80,7 @@ export default function TaskList() {
         <div className="flex self-center gap-2">
           <div
             className="cursor-pointer hover:text-input"
-            onClick={() => {
-              // newValue.current = {
-              //   id: v?.id,
-              // };
+            onClick={(e) => {
               setEditedTask({title: v?.title, id: v?.id});
               setEdite(true);
             }}

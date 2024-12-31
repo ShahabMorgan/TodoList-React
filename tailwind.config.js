@@ -14,7 +14,7 @@ module.exports = {
       colors: {
         input: "var(--input-color)",
         button: "var(--button-color)",
-        modal:"rgba(0,0,0,0.3)"
+        modal: "rgba(0,0,0,0.3)",
       },
       height: {
         form: "20.9rem",
@@ -28,8 +28,6 @@ module.exports = {
       spacing: {
         NavBar: "2.75rem",
         "main-heigth": "var(--main-heigth)",
-        "360logoWeight": "11rem",
-        "360logoHeight": "14.5rem",
         "Footer-Size": "var(--section-size)",
       },
       padding: {

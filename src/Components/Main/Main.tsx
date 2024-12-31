@@ -23,12 +23,15 @@ export default function Main() {
 
   return (
     <TodoListApp.Provider value={{modal, setModal, tasks, setTask}}>
-      <div className="flex flex-col gap-5">
-        <div className="flex justify-center gap-5">
-          <Form />
-          <Button action={openModal}>Add Task</Button>
+      <div>
+        <div className="mb-5 text-2xl font-bold text-input">To Do List App</div>
+        <div className="flex flex-col gap-5">
+          <div className="flex justify-center gap-5">
+            <Form />
+            <Button action={openModal}>Add Task</Button>
+          </div>
+          <TaskList />
         </div>
-        <TaskList />
       </div>
     </TodoListApp.Provider>
   );
